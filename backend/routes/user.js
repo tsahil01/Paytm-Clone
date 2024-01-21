@@ -3,6 +3,7 @@ const zod = require('zod')
 const User = require('../db')
 const jwt = require('jsonwebtoken')
 const JWT_SECRET = require('../config')
+const authMiddlewar = require('../middleware')
 
 const UserRoute = express.Router();
 
@@ -91,4 +92,43 @@ UserRoute.post("/signin", async (req,res)=>{
     return;
 })
 
+
+UserRoute.put('/update', authMiddlewar, async (req, res)=>{
+    try{
+        const updateUser = await User.findOneAndUpdate({
+            username: req.username
+        }, req.body)
+        res.json({
+            message: "Updated successfully"
+        })
+        return;
+    } catch(err){
+        res.status(411).json({
+            msg:"Error while updating information",
+            error: err
+        })
+    }
+})
+
+UserRoute.get('/bulk', authMiddlewar, async (req, res)=>{
+    const filter = req.query.filter
+    const users = []
+    try{
+        const find =  await User.find({ $or: [{ firstname: filter }, { lastname: filter }] });
+        find.forEach((e)=>{
+            users.push({
+                firstname: e.firstname,
+                lastname: e.lastname,
+                _id: e._id
+            })
+        })
+        res.json({
+            users: users
+        })
+        
+    } catch(err){
+        console.log(err)
+    }
+    
+})
 module.exports = UserRoute

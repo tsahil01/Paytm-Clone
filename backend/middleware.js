@@ -3,7 +3,7 @@ const JWT_SECRET = require('./config');
 
 function authMiddlewar(req, res, next){
     const authHeader = req.headers.authorization
-    if(!authHeader.startwith('Bearer ')){
+    if(!authHeader.startsWith('Bearer ')){
         res.status(403).json({
             msg:"Inproper Header"
         })
@@ -12,7 +12,7 @@ function authMiddlewar(req, res, next){
     const token = authHeader.split(" ")[1]
     try{
         const decode = jwt.verify(token, JWT_SECRET);
-        req.userId = decode.userId;
+        req.username = decode.username;
         next();
     }catch(err){
         res.status(403).json({
