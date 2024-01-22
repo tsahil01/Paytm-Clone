@@ -1,18 +1,14 @@
-import { Link } from "react-router-dom";
-import App from "../App";
-
-export default function LoginPage(){
+export default function SignUpPage(){
     return<>
     <div className="h-screen flex items-center justify-center bg-slate-800">
-        <div className="border- m-5 p-5 md:px-9 bg-slate-900 rounded-lg border-slate-900 text-white">
+        <div className="border- m-5 p-5 md:px-9 bg-slate-900 rounded-lg border-slate-900 lg:w-1/3 text-white">
             <div className="flex justify-center pb-5">
                 <div className="font-bold text-4xl">Sign Up</div>
             </div>
             <div className="flex justify-center">
                 <div className="content-center">Enter your information to create a account</div>
             </div>
-
-            {/* Form */}
+            
             <div className="my-7">
                 <div className="font-bold text-xl">First name</div>
                 <input type="text" name="" id="" placeholder="John" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" />

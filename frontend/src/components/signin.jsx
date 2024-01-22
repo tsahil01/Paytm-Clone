@@ -1,0 +1,30 @@
+export default function SignInPage(){
+    return<>
+    <div className="h-screen flex items-center justify-center bg-slate-800">
+        <div className="border- m-5 p-5 md:px-9 bg-slate-900 rounded-lg border-slate-900 lg:w-1/3 text-white">
+            <div className="flex justify-center pb-5">
+                <div className="font-bold text-4xl">Sign In</div>
+            </div>
+            <div className="flex justify-center">
+                <div className="content-center">Enter your information to access your account</div>
+            </div>
+            
+           
+            <div className="my-7">
+                <div className="font-bold text-xl">Email</div>
+                <input type="email" name="" id="" placeholder="johncena@exampl.com" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" />
+            </div>
+            <div className="my-7">
+                <div className="font-bold text-xl">Password</div>
+                <input type="password" name="" id="" placeholder="" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" />
+            </div>
+            <div className="mt-7 mb-3">
+                <button className="w-full rounded-lg bg-white text-black p-2 mt-2 outline-none border-slate-300 font-bold text-2xl">Sign Up</button>
+            </div>
+            <div className="flex justify-center">
+                <div className="content-center">Don't have an Account? <button className="underline">Create account</button></div>
+            </div>
+        </div>
+    </div>
+    </>
+}
