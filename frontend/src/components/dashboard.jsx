@@ -4,7 +4,7 @@ export default function Dashboard({
 }){
     return<>
     <div className="h-screen bg-slate-800 text-white">
-        <nav className="flex justify-between p-7 bg-slate-900">
+        <nav className="flex justify-between p-5 bg-slate-900 drop-shadow-2xl">
             <div className="font-black text-2xl bg-slate-900 my-auto">Payments App</div>
             <div className="flex gap-3">
                 <div className="text-xl font-bold m-auto hidden md:block">Hello,</div>
