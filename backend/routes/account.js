@@ -18,7 +18,8 @@ accountRoute.get('/balance',authMiddlewar, async(req, res)=>{
         const balance = account.balance;
         
         res.json({
-            balance: balance
+            balance: balance,
+            firstname: user.firstname
         })
     } catch(err){
         res.status(411).json({

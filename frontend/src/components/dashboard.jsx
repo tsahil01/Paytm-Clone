@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { baseBackendUrl } from "../../shared/urls"
 
 export default function Dashboard(){
-    const [firstname, setFirstname] = useState('User')
+    const [firstname, setFirstname] = useState("User")
     const [balance, setBalance] = useRecoilState(balanceAtom)
     
     const getData = async()=>{
@@ -17,6 +17,7 @@ export default function Dashboard(){
         })
         const data = await response.json();
         setBalance(data.balance)
+        setFirstname(data.firstname)
     }
 
     useEffect(()=>{
@@ -42,7 +43,7 @@ export default function Dashboard(){
         <main className="lg:px-10">
             <div className="flex p-7 gap-5 justify-center">
                 <div className="font-black text-xl">Your Balance: </div>
-                <div className="text-xl">${balance}</div>
+                <div className="text-xl">${balance.toFixed(3)}</div>
             </div>
 
             <div className="flex flex-col p-7 gap-2">
