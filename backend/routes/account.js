@@ -81,7 +81,7 @@ accountRoute.post('/transfer', authMiddlewar, async (req, res)=>{
 
     await session.commitTransaction();
     res.json({
-        message: "Transfer successful"
+        msg: "Transfer successful"
     })
 
     
