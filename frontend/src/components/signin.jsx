@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom"
+
 export default function SignInPage(){
+    const navigate = useNavigate()
     return<>
-    <div className="h-screen flex items-center justify-center bg-slate-800">
+    <div className="h-screen flex items-center justify-center bg-slate-800 overflow-auto">
         <div className="border- m-5 p-5 md:px-9 bg-slate-900 rounded-lg border-slate-900 lg:w-1/3 text-white">
             <div className="flex justify-center pb-5">
                 <div className="font-bold text-4xl">Sign In</div>
@@ -22,7 +25,7 @@ export default function SignInPage(){
                 <button className="w-full rounded-lg bg-white text-black p-2 mt-2 outline-none border-slate-300 font-bold text-2xl">Sign Up</button>
             </div>
             <div className="flex justify-center">
-                <div className="content-center">Don't have an Account? <button className="underline">Create account</button></div>
+                <div className="content-center">Don't have an Account? <button className="underline" onClick={()=>navigate('/sign-up')}>Create account</button></div>
             </div>
         </div>
     </div>

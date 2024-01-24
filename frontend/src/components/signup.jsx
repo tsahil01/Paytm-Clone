@@ -1,6 +1,60 @@
+import { useState } from "react";
+import { redirect, useNavigate } from "react-router-dom"
+import { isAuth } from "../App";
+
 export default function SignUpPage(){
+    const navigate = useNavigate();
+    const [username, setUsername] = useState("")
+    const [firstname, setFirstname] = useState("")
+    const [lastname, setLastname] = useState("")
+    const [password, setPassowrd] = useState("")
+
+    const RegisterUser = async () => {
+        const fetchData = await fetch("http://localhost:3000/api/v1/user/signup", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json', // Added content type header
+          },
+          body: JSON.stringify({
+            username,
+            firstname,
+            lastname,
+            password,
+          }),
+        });
+
+        const data = await fetchData.json();
+
+        if(data.msg == "New User created"){
+
+            const token = data.token;
+            const addTokentoHeaders = await fetch("http://localhost:3000/api/v1", {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            // isAuth = true;
+            navigate('/dashboard')
+        } else{
+            alert(data.msg)
+        }
+        console.log(data);
+      };
+
+
+
+
+
+
+
+
+
+
+
     return<>
-    <div className="h-screen flex items-center justify-center bg-slate-800">
+    <div className="h-screen flex items-center justify-center bg-slate-800 overflow-auto">
         <div className="border- m-5 p-5 md:px-9 bg-slate-900 rounded-lg border-slate-900 lg:w-1/3 text-white">
             <div className="flex justify-center pb-5">
                 <div className="font-bold text-4xl">Sign Up</div>
@@ -11,25 +65,30 @@ export default function SignUpPage(){
             
             <div className="my-7">
                 <div className="font-bold text-xl">First name</div>
-                <input type="text" name="" id="" placeholder="John" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" />
+                <input required type="text" name="" id="" placeholder="John" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300"
+                onChange={(e)=>setFirstname(e.target.value)}/>
             </div>
             <div className="my-7">
                 <div className="font-bold text-xl">Last name</div>
-                <input type="text" name="" id="" placeholder="Cena" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" />
+                <input required type="text" name="" id="" placeholder="Cena" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" 
+                onChange={(e)=>setLastname(e.target.value)}/>
             </div>
             <div className="my-7">
                 <div className="font-bold text-xl">Email</div>
-                <input type="email" name="" id="" placeholder="johncena@exampl.com" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" />
+                <input required type="email" name="" id="" placeholder="johncena@exampl.com" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" 
+                onChange={(e)=>setUsername(e.target.value)}/>
             </div>
             <div className="my-7">
                 <div className="font-bold text-xl">Password</div>
-                <input type="password" name="" id="" placeholder="" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" />
+                <input required type="password" name="" id="" placeholder="" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" 
+                onChange={(e)=>setPassowrd(e.target.value)}/>
             </div>
             <div className="mt-7 mb-3">
-                <button className="w-full rounded-lg bg-white text-black p-2 mt-2 outline-none border-slate-300 font-bold text-2xl">Sign Up</button>
+                <button className="w-full rounded-lg bg-white text-black p-2 mt-2 outline-none border-slate-300 font-bold text-2xl" 
+                onClick={RegisterUser}>Sign Up</button>
             </div>
             <div className="flex justify-center">
-                <div className="content-center">Already have account? <button className="underline">Link</button></div>
+                <div className="content-center">Already have account? <button className="underline" onClick={()=>navigate('/sign-in')}>Link</button></div>
             </div>
         </div>
     </div>
