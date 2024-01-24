@@ -119,11 +119,31 @@ UserRoute.put('/update', authMiddlewar, async (req, res)=>{
     }
 })
 
+UserRoute.get('/all-users', authMiddlewar, async (req, res)=>{
+    const findAll = await User.find();
+    const users = []
+    try{
+
+        findAll.forEach((e)=>{
+            users.push({
+                firstname: e.firstname,
+                lastname: e.lastname,
+                _id: e._id
+            })
+        })
+        res.json({
+            users: users
+        })
+    }catch(err){
+        console.log(err)
+    }
+})
+
 UserRoute.get('/bulk', authMiddlewar, async (req, res)=>{
     const filter = req.query.filter
     const users = []
     try{
-        const find =  await User.find({ $or: [{ firstname: filter }, { lastname: filter }] });
+        const find =  await User.find({ $or: [{ firstname: filter }, { lastname: filter }, {username: filter}] });
         find.forEach((e)=>{
             users.push({
                 firstname: e.firstname,
