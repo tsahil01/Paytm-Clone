@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { redirect, useNavigate } from "react-router-dom"
-import { isAuth } from "../App";
+import { baseBackendUrl } from "../../shared/urls";
 
 export default function SignUpPage(){
     const navigate = useNavigate();
     const [username, setUsername] = useState("")
     const [firstname, setFirstname] = useState("")
     const [lastname, setLastname] = useState("")
-    const [password, setPassowrd] = useState("")
+    const [password, setPassword] = useState("")
 
     const RegisterUser = async () => {
-        const fetchData = await fetch("http://localhost:3000/api/v1/user/signup", {
+        const fetchData = await fetch(`${baseBackendUrl}/user/signup`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json', // Added content type header
@@ -24,33 +24,15 @@ export default function SignUpPage(){
         });
 
         const data = await fetchData.json();
+        if(data.token){
 
-        if(data.msg == "New User created"){
-
-            const token = data.token;
-            const addTokentoHeaders = await fetch("http://localhost:3000/api/v1", {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
-            // isAuth = true;
+            localStorage.setItem('token', data.token)
             navigate('/dashboard')
         } else{
             alert(data.msg)
         }
         console.log(data);
       };
-
-
-
-
-
-
-
-
-
 
 
     return<>
@@ -65,23 +47,23 @@ export default function SignUpPage(){
             
             <div className="my-7">
                 <div className="font-bold text-xl">First name</div>
-                <input required type="text" name="" id="" placeholder="John" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300"
+                <input required type="text" name="" id="fname" placeholder="John" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300"
                 onChange={(e)=>setFirstname(e.target.value)}/>
             </div>
             <div className="my-7">
                 <div className="font-bold text-xl">Last name</div>
-                <input required type="text" name="" id="" placeholder="Cena" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" 
+                <input required type="text" name="" id="lname" placeholder="Cena" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" 
                 onChange={(e)=>setLastname(e.target.value)}/>
             </div>
             <div className="my-7">
-                <div className="font-bold text-xl">Email</div>
-                <input required type="email" name="" id="" placeholder="johncena@exampl.com" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" 
+                <div className="font-bold text-xl">Username/Email</div>
+                <input required type="email" name="" id="username" placeholder="johncena@exampl.com" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" 
                 onChange={(e)=>setUsername(e.target.value)}/>
             </div>
             <div className="my-7">
                 <div className="font-bold text-xl">Password</div>
-                <input required type="password" name="" id="" placeholder="" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" 
-                onChange={(e)=>setPassowrd(e.target.value)}/>
+                <input required type="password" name="password" id="" placeholder="" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" 
+                onChange={(e)=>setPassword(e.target.value)}/>
             </div>
             <div className="mt-7 mb-3">
                 <button className="w-full rounded-lg bg-white text-black p-2 mt-2 outline-none border-slate-300 font-bold text-2xl" 
