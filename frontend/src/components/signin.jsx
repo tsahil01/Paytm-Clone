@@ -8,7 +8,6 @@ export default function SignInPage(){
     const navigate = useNavigate();
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const setFirstnameRecoil = useSetRecoilState(userAtom)
 
     const loginUser = async ()=>{
         const response = await fetch(`${baseBackendUrl}/user/signin`,{
