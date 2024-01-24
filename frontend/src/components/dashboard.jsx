@@ -2,6 +2,7 @@ import { useRecoilState, useRecoilValue } from "recoil"
 import { balanceAtom } from "../sources/atoms/balanceAtom"
 import { useEffect, useState } from "react"
 import { baseBackendUrl } from "../../shared/urls"
+import AllUsers from "./allUsers"
 
 export default function Dashboard(){
     const [firstname, setFirstname] = useState("User")
@@ -46,15 +47,7 @@ export default function Dashboard(){
                 <div className="text-xl">${balance.toFixed(3)}</div>
             </div>
 
-            <div className="flex flex-col p-7 gap-2">
-                <div className="font-black text-xl w-full">Users:</div>
-                <input type="text"className="md:w-1/3 rounded-lg bg-slate-900 p-3 mt-2 outline-none" placeholder="Search User" />
-                <div className="flex justify-between mt-2">
-                    <div className="font-bold my-auto">Other User's name</div>
-                    <button className="rounded-lg bg-white text-black px-2 p-1 mt-2 outline-none border-slate-300 font-bold">Send Money</button>
-                </div>
-                
-            </div>
+            <AllUsers/>
         </main>
     </div>
     </>
