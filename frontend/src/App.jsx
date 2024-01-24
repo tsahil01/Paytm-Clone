@@ -3,12 +3,14 @@ import SignInPage from "./components/signin";
 import SignUpPage from "./components/signup";
 import Dashboard from "./components/dashboard";
 import { SendMoney } from "./components/SendMoney";
+import { RecoilRoot } from "recoil";
 
 export let isAuth;
 export default function App(){
 
 
   return<>
+  <RecoilRoot>
     <BrowserRouter>
       <Routes>
         <Route path="/sign-in" element={<SignInPage/>}/>
@@ -17,5 +19,6 @@ export default function App(){
         <Route path="/sendMoney" element={<SendMoney/>}/>
       </Routes>
     </BrowserRouter>
+  </RecoilRoot>
   </>
 }
