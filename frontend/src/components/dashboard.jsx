@@ -44,7 +44,7 @@ export default function Dashboard(){
         <main className="lg:px-10">
             <div className="flex p-7 gap-5 justify-center">
                 <div className="font-black text-xl">Your Balance: </div>
-                <div className="text-xl">${balance.toFixed(3)}</div>
+                <div className="text-xl">${Math.round(balance)}</div>
             </div>
 
             <AllUsers/>
