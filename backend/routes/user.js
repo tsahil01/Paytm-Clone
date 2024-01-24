@@ -26,6 +26,7 @@ UserRoute.post("/signup", async (req, res)=>{
         res.status(404).json({
             msg:"Zod cannot verify the data"
         })
+        return;
     }
     const findUser = await User.findOne({
         username: req.body.username
