@@ -1,10 +1,30 @@
-export default function Dashboard({
-    firstname = "Sahil",
-    balance = 5000
-}){
+import { useRecoilState, useRecoilValue } from "recoil"
+import { balanceAtom } from "../sources/atoms/balanceAtom"
+import { useEffect, useState } from "react"
+import { baseBackendUrl } from "../../shared/urls"
+
+export default function Dashboard(){
+    const [firstname, setFirstname] = useState('User')
+    const [balance, setBalance] = useRecoilState(balanceAtom)
+    
+    const getData = async()=>{
+        const response = await fetch(`${baseBackendUrl}/account/balance`,{
+            method: "GET",
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        const data = await response.json();
+        setBalance(data.balance)
+    }
+
+    useEffect(()=>{
+        getData()
+    }, [balance])
     return<>
     <div className="h-screen bg-slate-800 text-white">
-        <nav className="flex justify-between p-5 bg-slate-900 drop-shadow-2xl">
+        <nav className="flex justify-between p-5 lg:px-10 bg-slate-900 drop-shadow-2xl">
             <div className="font-black text-2xl bg-slate-900 my-auto">Payments App</div>
             <div className="flex gap-3">
                 <div className="text-xl font-bold m-auto hidden md:block">Hello,</div>
@@ -19,7 +39,7 @@ export default function Dashboard({
             </div>
         </nav>
 
-        <main>
+        <main className="lg:px-10">
             <div className="flex p-7 gap-5 justify-center">
                 <div className="font-black text-xl">Your Balance: </div>
                 <div className="text-xl">${balance}</div>
