@@ -3,8 +3,10 @@ const zod = require('zod')
 const {User} = require('../db')
 const {Account} = require('../db')
 const jwt = require('jsonwebtoken')
-const JWT_SECRET = require('../config')
 const authMiddlewar = require('../middleware')
+
+require('dotenv').config()
+const JWT_SECRET = process.env.JSON_WEB_TOKEN_SECRET
 
 const UserRoute = express.Router();
 
