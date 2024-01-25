@@ -40,15 +40,15 @@ accountRoute.post('/transfer', authMiddlewar, async (req, res)=>{
     const user = await User.findOne({
         username: req.username
     }).session(session)
-
+    
     const userId = user._id
     
     const senderAccount = await Account.findOne({
         userId: userId
     }).session(session);
-    const balance = senderAccount.balance;
+    const senderBalance = senderAccount.balance;
 
-    if(balance<amount){
+    if(senderBalance<amount){
         await session.abortTransaction();
         res.status(400).json({
             msg: "Insufficient balance"
@@ -67,17 +67,17 @@ accountRoute.post('/transfer', authMiddlewar, async (req, res)=>{
         })
     }
 
+    
     await Account.findOneAndUpdate({
         userId: userId
-    }, {
-        balance : balance - amount
+    }, { $inc: { balance: -amount } 
     }).session(session);
-
+    
     await Account.findOneAndUpdate({
         userId: reciversUserId
-    }, {
-        balance : balance + amount
-    }).session(session);
+    }, { $inc: { balance: +amount } }
+    ).session(session);
+
 
     await session.commitTransaction();
     res.json({
