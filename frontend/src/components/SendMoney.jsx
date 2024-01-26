@@ -4,7 +4,7 @@ import { baseBackendUrl } from "../../shared/urls"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-export function SendMoney(){
+export default function SendMoney(){
     const navigate = useNavigate()
     const getTransfererUser = useRecoilValue(transfererUser)
     const [amount, setAmount] = useState(0)
