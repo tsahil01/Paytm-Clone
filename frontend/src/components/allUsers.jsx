@@ -1,38 +1,41 @@
-import { useEffect } from "react"
-import { useRecoilState, useSetRecoilState } from "recoil"
+import { useEffect, useState } from "react"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 import { usersAtom } from "../sources/atoms/usersAtom"
 import { transfererUser } from "../sources/atoms/sendUserAtom"
 import { useNavigate } from "react-router-dom"
-import { baseBackendUrl } from "../../shared/urls"
 
 export default function AllUsers(){
+    let timeout;
     const navigate = useNavigate()
-    const[allUsers, setallUsers] = useRecoilState(usersAtom)
+    const users = useRecoilValue(usersAtom)
     const setTransfererUserId = useSetRecoilState(transfererUser)
 
-    const fetchAllUsers = async()=>{
-        const response = await fetch(`${baseBackendUrl}/user/all-users`,{
-            method: "GET",
-            headers:{
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        const data = await response.json()
-        setallUsers(data.users)
-    }
+    const [inputValue, setInputValue] = useState("")
+    const [filteredUsers, setFilteredUsers] = useState(users);
 
-    useEffect(()=>{
-        fetchAllUsers()
-    },[])
+    useEffect(() => {
+    // Filter users based on inputValue when it changes
+    const filtered = users.filter((user) =>
+      user.firstname.toLowerCase().includes(inputValue.toLowerCase())
+    );
+    setFilteredUsers(filtered);
+  }, [inputValue, users]);
+
+  function debounce(value){
+    clearTimeout(timeout)
+    timeout = setTimeout(()=>{
+        setInputValue(value)
+    }, 500)
+  }
 
     return<>
     <div className="flex flex-col p-7 gap-2">
         <div className="font-black text-xl w-full">Users:</div>
-        <input type="text"className="md:w-1/3 rounded-lg bg-slate-900 p-3 mt-2 outline-none" placeholder="Search User" />
-        {allUsers.map((user)=>{
+        <input type="text"className="md:w-1/3 rounded-lg bg-slate-900 p-3 mt-2 outline-none" placeholder="Search User" onChange={(e) =>
+             debounce(e.target.value)}/>
+        {filteredUsers.map((user)=>{
             return<>
-            <div className="flex justify-between mt-2">
+            <div className="flex justify-between mt-2" key={user._id}>
                 <div className="font-bold my-auto">{user.firstname} {user.lastname}</div>
                 <button className="rounded-lg bg-white text-black px-2 p-1 mt-2 outline-none border-slate-300 font-bold"
                 onClick={()=>{
