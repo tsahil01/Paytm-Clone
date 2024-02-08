@@ -13,15 +13,10 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "/$1"
     }
   ],
   "env": {
     "PORT": 3000
-  },
-  "functions": {
-    "api/v1/index.js": {
-      "runtime": "@vercel/node"
-    }
   }
 }
