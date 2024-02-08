@@ -25,7 +25,7 @@ export default function Dashboard(){
         getData()
     }, [balance])
     return<>
-    <div className="h-max bg-slate-800 text-white">
+    <div className="min-h-screen bg-slate-800 text-white">
         <nav className="flex justify-between p-5 lg:px-10 bg-slate-900 drop-shadow-2xl">
             <div className="font-black text-2xl bg-slate-900 my-auto">Payments App</div>
             <div className="flex gap-3">
