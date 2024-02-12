@@ -1,1 +1,1 @@
-export const baseBackendUrl = 'http://192.168.1.6:3000/api/v1'
+export const baseBackendUrl = 'http://4.240.64.249:3000/api/v1'
