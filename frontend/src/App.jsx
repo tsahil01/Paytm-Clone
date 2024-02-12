@@ -17,6 +17,7 @@ export default function App(){
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Redirect />} />
+        <Route path="/loader" element={<Loader/>} />
         <Route path="/sign-in" element={<Suspense fallback={<Loader/>}> <SignInPage/> </Suspense>}/>
         <Route path="/sign-up" element={<Suspense fallback={<Loader/>}> <SignUpPage/> </Suspense>}/>
         <Route path="/dashboard" element={<Suspense fallback={<Loader/>}> <Dashboard/> </Suspense>}/>

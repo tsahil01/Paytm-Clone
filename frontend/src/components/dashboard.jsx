@@ -27,7 +27,7 @@ export default function Dashboard(){
     return<>
     <div className="min-h-screen bg-slate-800 text-white">
         <nav className="flex justify-between p-5 lg:px-10 bg-slate-900 drop-shadow-2xl">
-            <div className="font-black text-2xl bg-slate-900 my-auto">Payments App</div>
+            <div className="font-black text-2xl bg-slate-900 my-auto"><span className='text-blue-600'>Payments</span> App</div>
             <div className="flex gap-3">
                 <div className="text-xl font-bold m-auto hidden md:block">Hello,</div>
                 <button className="flex gap-2">
