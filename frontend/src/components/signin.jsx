@@ -32,7 +32,7 @@ export default function SignInPage(){
     }
 
     return<>
-    <div className="h-screen flex items-center justify-center bg-slate-800 overflow-auto">
+    <div className="h-screen flex items-center justify-center bg-slate-950 overflow-auto">
         <div className="border- m-5 p-5 md:px-9 bg-slate-900 rounded-lg border-slate-900 lg:w-1/3 text-white">
             <div className="flex justify-center pb-5">
                 <div className="font-bold text-4xl">Sign In</div>
@@ -44,13 +44,13 @@ export default function SignInPage(){
            
             <div className="my-7">
                 <div className="font-bold text-xl">Username/Email</div>
-                <input type="email" name="" id="username" placeholder="johncena@exampl.com" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" 
+                <input type="email" name="" id="username" placeholder="johncena@exampl.com" className="w-full rounded-lg bg-slate-950 p-3 mt-2 outline-none border-slate-300" 
                 onChange={(e)=>setUsername(e.target.value)}/>
             </div>
 
             <div className="my-7">
                 <div className="font-bold text-xl">Password</div>
-                <input type="password" name="" id="password" placeholder="" className="w-full rounded-lg bg-slate-800 p-3 mt-2 outline-none border-slate-300" 
+                <input type="password" name="" id="password" placeholder="" className="w-full rounded-lg bg-slate-950 p-3 mt-2 outline-none border-slate-300" 
                 onChange={(e)=>{
                     setPassword(e.target.value)
                 }}/>

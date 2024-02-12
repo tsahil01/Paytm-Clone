@@ -31,7 +31,7 @@ export default function AllUsers(){
     return<>
     <div className="flex flex-col p-7 gap-2">
         <div className="font-black text-xl w-full">Users:</div>
-        <input type="text"className="md:w-1/3 rounded-lg bg-slate-900 p-3 mt-2 outline-none" placeholder="Search User" onChange={(e) =>
+        <input type="text"className="md:w-1/3 rounded-lg bg-slate-950 p-3 mt-2 outline-none" placeholder="Search User" onChange={(e) =>
              debounce(e.target.value)}/>
         {filteredUsers.map((user)=>{
             return<>
