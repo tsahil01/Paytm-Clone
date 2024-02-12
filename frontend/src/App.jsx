@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { Suspense, lazy, useEffect, useState } from "react";
+import Loader from "./components/Loader";
 
 const SignInPage = lazy(()=> import('./components/signin'))
 const SignUpPage = lazy(()=> import('./components/signup'))
@@ -16,10 +17,10 @@ export default function App(){
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Redirect />} />
-        <Route path="/sign-in" element={<Suspense fallback={"Loading..."}> <SignInPage/> </Suspense>}/>
-        <Route path="/sign-up" element={<Suspense fallback={"Loading..."}> <SignUpPage/> </Suspense>}/>
-        <Route path="/dashboard" element={<Suspense fallback={"Loading..."}> <Dashboard/> </Suspense>}/>
-        <Route path="/sendMoney" element={<Suspense fallback={"Loading..."}> <SendMoney/> </Suspense>}/>
+        <Route path="/sign-in" element={<Suspense fallback={<Loader/>}> <SignInPage/> </Suspense>}/>
+        <Route path="/sign-up" element={<Suspense fallback={<Loader/>}> <SignUpPage/> </Suspense>}/>
+        <Route path="/dashboard" element={<Suspense fallback={<Loader/>}> <Dashboard/> </Suspense>}/>
+        <Route path="/sendMoney" element={<Suspense fallback={<Loader/>}> <SendMoney/> </Suspense>}/>
       </Routes>
     </BrowserRouter>
   </RecoilRoot>
